@@ -1,4 +1,3 @@
-package EmulatedScheduler;
 import java.lang.Exception;
 
 /**

@@ -1,4 +1,3 @@
-package EmulatedScheduler;
 import java.util.Random;
 import java.util.Queue;
 
@@ -35,7 +34,7 @@ public class Driver {
 		Random r = new Random();
 		
 		Queue<Process> q = new Clock<Process>();
-		
+
 		for (int i=0; i < 100; i++) {
 			
 			Process p = new Process(r.nextInt(Integer.MAX_VALUE));

@@ -3,11 +3,10 @@ import java.util.*;
 /**
  * Created by Owner on 10/6/2016.
  */
-public class Clock <E> implements Queue <E>{
+public class Clock<E> implements Queue<E>{
 
     public final int quant;
-    public int size, front, back;
-    List<E> processes = new LinkedList<E>();
+    List<Process> processes = new LinkedList<Process>();
 
     public Clock() {
         quant = 0;
@@ -15,7 +14,7 @@ public class Clock <E> implements Queue <E>{
 
     @Override
     public int size() {
-        return 0;
+        return processes.size();
     }
 
     @Override
@@ -30,7 +29,7 @@ public class Clock <E> implements Queue <E>{
 
     @Override
     public Iterator iterator() {
-        return null;
+        return processes.iterator();
     }
 
     @Override
@@ -55,27 +54,27 @@ public class Clock <E> implements Queue <E>{
 
     @Override
     public boolean addAll(Collection c) {
-        return false;
+        return processes.addAll(c);
     }
 
     @Override
     public void clear() {
-
+        processes.clear();
     }
 
     @Override
     public boolean retainAll(Collection c) {
-        return false;
+        return processes.retainAll(c);
     }
 
     @Override
     public boolean removeAll(Collection c) {
-        return false;
+        return processes.removeAll(c);
     }
 
     @Override
     public boolean containsAll(Collection c) {
-        return false;
+        return processes.containsAll(c);
     }
 
     @Override

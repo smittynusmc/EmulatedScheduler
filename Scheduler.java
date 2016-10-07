@@ -4,5 +4,13 @@ import java.util.*;
  */
 public class Scheduler {
 
-    Clock<Process> processes = new Clock<Process>();
+    Queue <Process> processes = new Clock<Process>();
+
+    public Scheduler(Queue<Process> processes) {
+        this.processes = processes;
+    }
+
+    public boolean run(){
+        return false;
+    }
 }
