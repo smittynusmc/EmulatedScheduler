@@ -10,7 +10,14 @@ public class Scheduler {
         this.processes = processes;
     }
 
-    public boolean run(){
-        return false;
+    public boolean run() throws TerminatedProcessException {
+        while (!processes.isEmpty()) {
+            Process nextProc = processes.remove();
+            if (nextProc.getTimeToRun() > Clock.getQuant()){
+                nextProc.run(Clock.getQuant());
+                processes.add(nextProc);
+            }
+        }
+        return processes.isEmpty();
     }
 }
