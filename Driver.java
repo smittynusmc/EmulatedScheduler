@@ -7,7 +7,7 @@ public class Driver {
 	 * Runs the driver and calculates the elapsed time in nanoseconds for all scheduling activites.
 	 * @param args - unused
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws TerminatedProcessException {
 		
 		Driver d = new Driver();
 		long elapsed = d.run();
@@ -18,7 +18,7 @@ public class Driver {
 			
 		} else {
 			
-			System.out.println("The elapsed time for the scheduler was " + elapsed + " nano seconds");
+			System.out.println("The elapsed time for the scheduler was " + elapsed/1000000000 + " seconds");
 		}
 		
 	}
@@ -28,7 +28,7 @@ public class Driver {
 	 * scheduler which schedulers the processes and runs them.
 	 * @return The time it takes to run the scheduling of all processes.
 	 */
-	public long run() {
+	public long run() throws TerminatedProcessException {
 		
 		long start = System.nanoTime(); // get current time
 		Random r = new Random();
