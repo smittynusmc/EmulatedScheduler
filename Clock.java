@@ -3,13 +3,17 @@ import java.util.*;
 /**
  * Created by Owner on 10/6/2016.
  */
-public class Clock<E> implements Queue<E>{
+public class Clock<Process> implements Queue<Process>{
 
-    public final int quant;
+    public static int quant;
     List<Process> processes = new LinkedList<Process>();
 
     public Clock() {
-        quant = 0;
+        quant = 10;
+    }
+
+    public static int getQuant() {
+        return quant;
     }
 
     @Override
@@ -44,12 +48,16 @@ public class Clock<E> implements Queue<E>{
 
     @Override
     public boolean add(Object o) {
-        return false;
+        Process process = (Process) o;
+        processes.add(processes.size(),process);
+        return true;
     }
+
 
     @Override
     public boolean remove(Object o) {
-        return false;
+        Process process = (Process) o;
+        return processes.remove(process);
     }
 
     @Override
@@ -79,26 +87,28 @@ public class Clock<E> implements Queue<E>{
 
     @Override
     public boolean offer(Object o) {
-        return false;
+        Process process = (Process) o;
+        processes.add(process);
+        return true;
     }
 
     @Override
-    public E remove() {
-        return null;
+    public Process remove() {
+        return processes.remove(0);
     }
 
     @Override
-    public E poll() {
-        return null;
+    public Process poll() {
+        return this.poll();
     }
 
     @Override
-    public E element() {
-        return null;
+    public Process element() {
+        return this.element();
     }
 
     @Override
-    public E peek() {
-        return null;
+    public Process peek() {
+        return this.peek();
     }
 }
