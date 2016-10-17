@@ -35,6 +35,7 @@ public class Driver {
 		
 		Queue<Process> q = new Clock<Process>();
 
+
 		for (int i=0; i < 100; i++) {
 			
 			Process p = new Process(r.nextInt(Integer.MAX_VALUE));

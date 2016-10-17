@@ -5,11 +5,16 @@ import java.util.*;
  */
 public class Clock<Process> implements Queue<Process>{
 
+
     public static int quant;
-    List<Process> processes = new LinkedList<Process>();
+    int size=0;
+    Node<Process> head;
+    private Node<Process> ref;
+
 
     public Clock() {
-        quant = 10;
+        quant = 500000;
+        this.head = new Node<Process>(null,null);
     }
 
     public static int getQuant() {
@@ -18,22 +23,28 @@ public class Clock<Process> implements Queue<Process>{
 
     @Override
     public int size() {
-        return processes.size();
+        return size;
     }
 
     @Override
-    public boolean isEmpty() {
-        return processes.isEmpty();
+    public boolean isEmpty()
+    {
+        boolean result = false;
+        if (size==0)
+        {
+            result = true;
+        }
+        return result;
     }
 
     @Override
     public boolean contains(Object o) {
-        return processes.contains(o);
+        return true;
     }
 
     @Override
     public Iterator iterator() {
-        return processes.iterator();
+        return null;
     }
 
     @Override
@@ -47,68 +58,102 @@ public class Clock<Process> implements Queue<Process>{
     }
 
     @Override
-    public boolean add(Object o) {
-        Process process = (Process) o;
-        processes.add(processes.size(),process);
-        return true;
+    public boolean add(Process value){
+            boolean result = false;
+            Node<Process> temp=new Node<Process>(value, null);   //added new parameter.
+            if (head.next==null) {
+                head.next = temp;
+                size++;
+                result = true;
+            }
+            else {
+                setRef(size);
+                ref.next = temp;
+                size++;
+                result = true;
+            }
+            return result;
     }
+
 
 
     @Override
     public boolean remove(Object o) {
-        Process process = (Process) o;
-        return processes.remove(process);
-    }
-
-    @Override
-    public boolean addAll(Collection c) {
-        return processes.addAll(c);
-    }
-
-    @Override
-    public void clear() {
-        processes.clear();
-    }
-
-    @Override
-    public boolean retainAll(Collection c) {
-        return processes.retainAll(c);
-    }
-
-    @Override
-    public boolean removeAll(Collection c) {
-        return processes.removeAll(c);
-    }
-
-    @Override
-    public boolean containsAll(Collection c) {
-        return processes.containsAll(c);
-    }
-
-    @Override
-    public boolean offer(Object o) {
-        Process process = (Process) o;
-        processes.add(process);
         return true;
     }
 
     @Override
-    public Process remove() {
-        return processes.remove(0);
+    public boolean addAll(Collection c) {
+        return true;
+    }
+
+    @Override
+    public void clear() {
+    }
+
+    @Override
+    public boolean retainAll(Collection c) {
+        return true;
+    }
+
+    @Override
+    public boolean removeAll(Collection c) {
+        return true;
+    }
+
+    @Override
+    public boolean containsAll(Collection c) {
+        return true;
+    }
+
+    public boolean offer(Process value) {
+            Node<Process> temp=new Node<Process>(value,head.next);   //added new parameter.
+            head.next = temp;
+            size++;
+        return true;
+    }
+
+    @Override
+    public Process remove ()
+    {
+        Process process = null;
+        if (!(head.next==null)) {
+            setRef(1);
+            head.next = ref.next;
+            ref.next = null;
+            size--;
+            process = ref.value;
+        }
+        return process;
     }
 
     @Override
     public Process poll() {
-        return this.poll();
+        return this.remove();
     }
 
     @Override
     public Process element() {
-        return this.element();
+        return get(0);
     }
 
     @Override
     public Process peek() {
-        return this.peek();
+        return get(0);
+    }
+
+    public Process get(int ndx){  //understood that ndx cannot be greater than size or negative
+        setRef(ndx);
+        return ref.value;
+    }
+
+    private void setRef(int ndx)
+    {
+        ref = head;
+        for (int i = 0; i < ndx; i++) {
+            if (ref.next != null) {
+                ref = ref.next;
+            }
+        }
     }
 }

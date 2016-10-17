@@ -35,7 +35,7 @@ public class Process {
 	 */
 	public void run(int quantum) throws TerminatedProcessException {
 		
-		if (timeToRun < 0) {
+		if (timeToRun <= 0) {
 			
 			throw new TerminatedProcessException("Process has been terminated");
 			

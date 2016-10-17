@@ -10,13 +10,23 @@ public class Scheduler {
         this.processes = processes;
     }
 
-    public boolean run() throws TerminatedProcessException {
+    public boolean run(){
+        int quant = Clock.getQuant();
         while (!processes.isEmpty()) {
-            Process nextProc = processes.remove();
-            if (nextProc.getTimeToRun() > Clock.getQuant()){
-                nextProc.run(Clock.getQuant());
-                processes.add(nextProc);
+            Process process = processes.remove();
+            try {
+                    process.run(quant);
+                    if (process.getTimeToRun()>0) { // process hasn't finished add it to the end of the list
+                        processes.add(process);
+                    }
+                    else {
+                        System.out.println(processes.size());   // process has finished. Keeps track
+                                                                // of process being finished and prints them
+                    }
+            } catch (TerminatedProcessException e) {
+
             }
+
         }
         return processes.isEmpty();
     }
